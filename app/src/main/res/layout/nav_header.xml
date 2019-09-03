@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:padding="10dp"
+    android:background="?attr/colorPrimary"
+    >
+
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/icon_image"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:src="@drawable/head"
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="10dp"
+    />
+
+    <TextView
+        android:id="@+id/tv_verssion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon_image"
+        android:textColor="#ffff"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:text="版权所有：彭亮 移动互联专业"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_mail"
+        android:layout_below="@+id/tv_verssion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#f8bfbf"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:text="联系方式：2224284270@qq.com"  />
+
+</RelativeLayout>

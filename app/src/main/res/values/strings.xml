@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">传媒通讯录</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_message__bottom__nav">Message_Bottom_NavActivity</string>
+
+    <!--SearchActivity-->
+    <string name="search_input_name">请输入姓名中的某个字或者全名</string>
+    <string name="search_input_phone_number">请输入完整手机号码</string>
+    <string name="search_input_group_number">请输入完整集团号码</string>
+    <string name="search_input_car_number">请输入完整或部分车牌号码</string>
+</resources>
