@@ -1,6 +1,7 @@
 package com.example.lenovo.address_list.util;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
@@ -11,9 +12,16 @@ import android.widget.Toast;
 
 import com.example.lenovo.address_list.R;
 import com.example.lenovo.address_list.adapter.SearchAdapter;
-import com.example.lenovo.address_list.bean.Person;
+import com.example.lenovo.address_list.db.Person;
 
+import org.litepal.crud.DataSupport;
+
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * @author : PengLiang
@@ -22,15 +30,56 @@ import java.util.List;
  */
 public class DialogUtil {
 
+    private static ProgressDialog progressDialog;
+
     // 同步更新提示框
-    public static void syncUpdateAlertDialog(Activity activity) {
+    public static void syncUpdateAlertDialog(final Activity activity, final SearchAdapter mAdapter,  List<com.example.lenovo.address_list.db.Person> listData) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("更新数据");
-        builder.setMessage("注意：此操作需要联网，请确保手机能够正常访问网络数据。" + "\n" +"系统将下载服务器上的最新数据，如果下载成功，则会清除本软件的历史数据后再写入最新数据，下载失败不会影响老数据的使用。" + "\n" + "不要重复点击此按钮，请耐心等待网络数据下载结束。");
+        builder.setMessage("注意：此操作需要联网，请确保手机能够正常访问网络数据。" + "\n" + "系统将下载服务器上的最新数据，如果下载成功，则会清除本软件的历史数据后再写入最新数据，下载失败不会影响老数据的使用。" + "\n" + "不要重复点击此按钮，请耐心等待网络数据下载结束。");
         builder.setPositiveButton("开始下载", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                progressDialog = new ProgressDialog(activity);
+                progressDialog.setTitle("正在更新数据");
+                progressDialog.setMessage("更新中");
+                progressDialog.show();
+                String address = "http://120.76.210.221/DzcmMailList/GetUser";
+                HttpUtil.sendOkHttpRequest(address, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Toast.makeText(activity, "加载失败", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String responseText = response.body().string();
+                        boolean result = false;
+                        result = ParseUtility.handleResponse(responseText);
+                        if (result) {
+                            if (progressDialog != null) {
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressDialog.dismiss();
+                                    }
+                                });
+
+                            }
+
+                            Toast.makeText(activity, "加载成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(activity, "json数据处理失败", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    }
+                });
             }
         });
         builder.setNegativeButton("暂不下载", new DialogInterface.OnClickListener() {
@@ -41,6 +90,8 @@ public class DialogUtil {
         });
         builder.show();
     }
+
+
 
 
     // 我的圈子提示框（警告框）
@@ -108,10 +159,10 @@ public class DialogUtil {
     }
 
     //按部门查找
-    private static void findDepartment(String data, List<com.example.lenovo.address_list.bean.Person> list, List<com.example.lenovo.address_list.bean.Person> listData, SearchAdapter mAdapter) {
+    private static void findDepartment(String data, List<Person> list, List<Person> listData, SearchAdapter mAdapter) {
         listData.clear();
         for (int i = 0; i < list.size(); i++) {
-            com.example.lenovo.address_list.bean.Person person = list.get(i);
+           Person person = list.get(i);
             String department = person.getDepartment() + "";
             if (person.getDepartment().contains(data) || department.contains(data)) {
                 listData.add(person);

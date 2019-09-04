@@ -26,10 +26,10 @@ import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
 
-    List<Person> list;
-    Context mContext;
+    private List<com.example.lenovo.address_list.db.Person> list;
+    private Context mContext;
 
-    public SearchAdapter(List<Person> list, Context context) {
+    public SearchAdapter(List<com.example.lenovo.address_list.db.Person> list, Context context) {
         this.list = list;
         this.mContext = context;
     }
@@ -56,7 +56,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.MyViewHolder holder, int i) {
-        final Person person = list.get(i);
+        final com.example.lenovo.address_list.db.Person person = list.get(i);
         holder.txt1.setText(person.getName());
         holder.txt2.setText(person.getDepartment());
 
@@ -66,8 +66,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                 // 个人信息的警告框
                 final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle(person.getName() + "的个人信息");
-                final String message[] = {"姓  名：" + person.getName(), "手机号码：" + person.getPhone_number(), "集团号码：" + person.getGroup_number(),
-                        "办公电话：" + person.getOffice_phone(), "车牌号码：" + person.getCar_number(), "所属部门：" + person.getDepartment(), "其他信息：" + person.getOther()
+                final String message[] = {"姓  名：" + person.getName(), "手机号码：" + person.getPhoneNumber(), "集团号码：" + person.getGroupNumber(),
+                        "办公电话：" + person.getOfficeNumber(), "车牌号码：" + person.getCarNumber(), "所属部门：" + person.getDepartment(), "其他信息：" + person.getOther()
                 };
                 builder.setItems(message, new DialogInterface.OnClickListener() {
                     @Override
@@ -83,7 +83,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                                         if (message[1].equals("手机号码：")) {
                                             Toast.makeText(mContext, "空号，无法拨号", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            callPhone(person.getPhone_number());
+                                            callPhone(person.getPhoneNumber());
                                         }
 
                                     }
@@ -94,7 +94,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                                         if (message[1].equals("手机号码：")) {
                                             Toast.makeText(mContext, "空号，无法发送短信", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            sendSMS(person.getPhone_number());
+                                            sendSMS(person.getPhoneNumber());
                                         }
 
                                     }
@@ -111,7 +111,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                                         if (message[2].equals("集团号码：")) {
                                             Toast.makeText(mContext, "空号，无法拨号", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            callPhone(person.getGroup_number());
+                                            callPhone(person.getGroupNumber());
                                         }
 
                                     }
@@ -122,7 +122,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                                         if (message[2].equals("集团号码：")) {
                                             Toast.makeText(mContext, "空号，无法发送短信", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            sendSMS(person.getGroup_number());
+                                            sendSMS(person.getGroupNumber());
                                         }
 
                                     }
@@ -140,7 +140,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                                         if (message[3].equals("办公电话：")) {
                                             Toast.makeText(mContext, "空号，无法拨号", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            callPhone(person.getOffice_phone());
+                                            callPhone(person.getOfficeNumber());
                                         }
                                     }
                                 });

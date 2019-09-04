@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import com.example.lenovo.address_list.R;
 import com.example.lenovo.address_list.adapter.SearchAdapter;
-import com.example.lenovo.address_list.bean.Person;
+import com.example.lenovo.address_list.db.Person;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class SearchUtil {
     // 设置查找方式
-    public static void setSearchMode(final int hint, final EditText mSearchEt, final List<Person> list, final List<Person> listData, final SearchAdapter mAdapter, Activity activity) {
+    public static void setSearchMode(final int hint, final EditText mSearchEt, final List<com.example.lenovo.address_list.db.Person> list, final List<Person> listData, final SearchAdapter mAdapter, Activity activity) {
         String stringHint = activity.getResources().getString(hint);
         mSearchEt.setHint(stringHint);
         String data = mSearchEt.getText().toString().trim();
@@ -80,7 +80,7 @@ public class SearchUtil {
 
 
     // 按姓名查找
-    public static void search(String data, List<Person> list, List<Person> listData, SearchAdapter mAdapter) {
+    public static void search(String data, List<com.example.lenovo.address_list.db.Person> list, List<com.example.lenovo.address_list.db.Person> listData, SearchAdapter mAdapter) {
         listData.clear();
         for (int i = 0; i < list.size(); i++) {
             Person person = list.get(i);
@@ -93,12 +93,12 @@ public class SearchUtil {
     }
 
     // 按手机号查找
-    public static void search_phone(String data, List<Person> list, List<Person> listData, SearchAdapter mAdapter) {
+    public static void search_phone(String data, List<com.example.lenovo.address_list.db.Person> list, List<com.example.lenovo.address_list.db.Person> listData, SearchAdapter mAdapter) {
         listData.clear();
         for (int i = 0; i < list.size(); i++) {
             Person person = list.get(i);
-            String phone_number = person.getPhone_number() + "";
-            if (person.getPhone_number().contains(data) || phone_number.contains(data)) {
+            String phone_number = person.getPhoneNumber() + "";
+            if (person.getPhoneNumber().contains(data) || phone_number.contains(data)) {
                 listData.add(person);
             }
         }
@@ -106,12 +106,12 @@ public class SearchUtil {
     }
 
     // 按车牌查找
-    public static void search_car(String data, List<Person> list, List<Person> listData, SearchAdapter mAdapter) {
+    public static void search_car(String data, List<com.example.lenovo.address_list.db.Person> list, List<com.example.lenovo.address_list.db.Person> listData, SearchAdapter mAdapter) {
         listData.clear();
         for (int i = 0; i < list.size(); i++) {
             Person person = list.get(i);
-            String car_number = person.getCar_number() + "";
-            if (person.getCar_number().contains(data) || car_number.contains(data)) {
+            String car_number = person.getCarNumber() + "";
+            if (person.getCarNumber().contains(data) || car_number.contains(data)) {
                 listData.add(person);
             }
         }
@@ -119,12 +119,12 @@ public class SearchUtil {
     }
 
     //按集团号查找
-    public static void search_group(String data, List<Person> list, List<Person> listData, SearchAdapter mAdapter) {
+    public static void search_group(String data, List<com.example.lenovo.address_list.db.Person> list, List<com.example.lenovo.address_list.db.Person> listData, SearchAdapter mAdapter) {
         listData.clear();
         for (int i = 0; i < list.size(); i++) {
             Person person = list.get(i);
-            String group_number = person.getGroup_number() + "";
-            if (person.getGroup_number().contains(data) || group_number.contains(data)) {
+            String group_number = person.getGroupNumber() + "";
+            if (person.getGroupNumber().contains(data) || group_number.contains(data)) {
                 listData.add(person);
             }
         }

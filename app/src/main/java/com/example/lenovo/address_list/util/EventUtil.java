@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.lenovo.address_list.R;
 import com.example.lenovo.address_list.activity.BottomNavigationActivity;
 import com.example.lenovo.address_list.adapter.SearchAdapter;
-import com.example.lenovo.address_list.bean.Person;
+import com.example.lenovo.address_list.db.Person;
 import com.example.lenovo.address_list.message_bottom_nav.Message_Bottom_NavActivity;
 
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class EventUtil {
 
-    public static void setNavViewEventAfter(NavigationView navView, final DrawerLayout mDrawerlayout, final Activity activity) {
+    public static void setNavViewEventAfter(NavigationView navView, final DrawerLayout mDrawerlayout, final Activity activity, final SearchAdapter mAdapter, final List<com.example.lenovo.address_list.db.Person> listData) {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -49,7 +49,7 @@ public class EventUtil {
                         return true;
                     //点击同步更新菜单
                     case R.id.nav_slideshow:
-                        DialogUtil.syncUpdateAlertDialog(activity);
+                        DialogUtil.syncUpdateAlertDialog(activity,mAdapter,listData);
                         mDrawerlayout.closeDrawers();
                         return true;
                     //点击系统设置菜单
