@@ -2,6 +2,7 @@ package com.example.lenovo.address_list.util;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,27 @@ import java.util.List;
  * Description : 对话框工具类，管理对话框
  */
 public class DialogUtil {
+
+    // 同步更新提示框
+    public static void syncUpdateAlertDialog(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("更新数据");
+        builder.setMessage("注意：此操作需要联网，请确保手机能够正常访问网络数据。" + "\n" +"系统将下载服务器上的最新数据，如果下载成功，则会清除本软件的历史数据后再写入最新数据，下载失败不会影响老数据的使用。" + "\n" + "不要重复点击此按钮，请耐心等待网络数据下载结束。");
+        builder.setPositiveButton("开始下载", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNegativeButton("暂不下载", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
 
     // 我的圈子提示框（警告框）
     public static void addMy(final Activity activity) {

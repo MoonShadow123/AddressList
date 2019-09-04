@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lenovo.address_list">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- 打电话权限 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!-- 读取短信权限 -->

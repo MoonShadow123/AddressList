@@ -49,7 +49,7 @@ public class EventUtil {
                         return true;
                     //点击同步更新菜单
                     case R.id.nav_slideshow:
-                        Toast.makeText(activity, "不好意思，本功能暂未开放", Toast.LENGTH_SHORT).show();
+                        DialogUtil.syncUpdateAlertDialog(activity);
                         mDrawerlayout.closeDrawers();
                         return true;
                     //点击系统设置菜单
